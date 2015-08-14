@@ -14,8 +14,11 @@ NSInteger const KKMPriceIncrement = 50000;
 NSInteger const KKMTableRowExpandHeight = 200.0f;
 NSInteger const KKMTableRowDefaultHeight = 44.0f;
 
+NSString* const KKMAnyString = @"Any";
 NSString* const KKMNoMinString = @"No Min";
 NSString* const KKMNoMaxString = @"No Max";
+NSString* const KKMUpToString = @"up to";
+NSString* const KKMPlusString = @"+";
 
 @interface KKMCollectorCarsSettingsViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -39,23 +42,47 @@ NSString* const KKMNoMaxString = @"No Max";
 
 @implementation KKMCollectorCarsSettingsViewController
 
+#pragma mark - View lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self setUp];
-    [self setUpPickerData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [self.yearToPickerView selectRow:(self.yearToRangeArray.count - 1) inComponent:0 animated:YES];
-    [self.priceMaxPickerView selectRow:(self.priceMaxRangeArray.count -1) inComponent:0 animated:YES];
+    [self setUpPickerDefaultValues];
 }
 
+- (void)setUpPickerDefaultValues
+{
+    [self.yearFromPickerView reloadAllComponents];
+    [self.yearToPickerView reloadAllComponents];
+    
+    [self.yearFromPickerView selectRow:0 inComponent:0 animated:YES];
+    [self.yearToPickerView selectRow:(self.yearToRangeArray.count - 1) inComponent:0 animated:YES];
+    self.yearSelectedValueLablel.text = KKMAnyString;
+    
+    
+    [self.priceMinPickerView reloadAllComponents];
+    [self.priceMaxPickerView reloadAllComponents];
+    
+    [self.priceMinPickerView selectRow:0 inComponent:0 animated:YES];
+    [self.priceMaxPickerView selectRow:(self.priceMaxRangeArray.count -1) inComponent:0 animated:YES];
+    self.priceSelectedValueLabel.text = KKMAnyString;
+}
+
+#pragma mark - Setup
 - (void)setUp
+{
+    [self hidePickerViews];
+    [self setUpYearPickerData];
+    [self setUpPricePickerData];
+}
+
+- (void)hidePickerViews
 {
     self.yearFromPickerView.hidden = YES;
     self.yearToPickerView.hidden = YES;
@@ -63,9 +90,31 @@ NSString* const KKMNoMaxString = @"No Max";
     self.priceMaxPickerView.hidden = YES;
 }
 
-- (void)setUpPickerData
+- (void)setUpPricePickerData
 {
-    // year
+    self.priceMinRangeArray = [NSMutableArray new];
+    self.priceMaxRangeArray = [NSMutableArray new];
+    [self.priceMinRangeArray addObject:KKMNoMinString];
+    
+    NSInteger j = 0;
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numberFormatter setMaximumFractionDigits:0];
+    
+    NSString *str;
+    while (j < KKMMaxPriceRange)
+    {
+        j += KKMPriceIncrement;
+        str =[numberFormatter stringFromNumber:[NSNumber numberWithInteger:j]];
+        [self.priceMinRangeArray addObject:str];
+        [self.priceMaxRangeArray addObject:str];
+    }
+    
+    [self.priceMaxRangeArray addObject:KKMNoMaxString];
+}
+
+- (void)setUpYearPickerData
+{
     self.yearFromRangeArray = [NSMutableArray new];
     self.yearToRangeArray = [NSMutableArray new];
     [self.yearFromRangeArray addObject:KKMNoMinString];
@@ -80,32 +129,23 @@ NSString* const KKMNoMaxString = @"No Max";
     }
     [self.yearToRangeArray addObject:KKMNoMaxString];
     
-    // price
-    self.priceMinRangeArray = [NSMutableArray new];
-    self.priceMaxRangeArray = [NSMutableArray new];
-    [self.priceMinRangeArray addObject:KKMNoMinString];
-
-    NSInteger j = 0;
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [numberFormatter setMaximumFractionDigits:0];
-
-    NSString *str;
-    while (j <= KKMMaxPriceRange)
-    {
-        j += KKMPriceIncrement;
-        str =[numberFormatter stringFromNumber:[NSNumber numberWithInteger:j]];
-        [self.priceMinRangeArray addObject:str];
-        [self.priceMaxRangeArray addObject:str];
-    }
-    
-    [self.priceMaxRangeArray addObject:KKMNoMaxString];
+    [self setUpPricePickerData];
 }
 
+
+
+#pragma mark - Actions
 - (IBAction)close:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)reset:(id)sender
+{
+    [self setUpPickerDefaultValues];
+}
+
+
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -352,6 +392,99 @@ NSString* const KKMNoMaxString = @"No Max";
     return [self pickerReusingView:view withText:text];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    NSInteger fromRow = 0;
+    NSInteger toRow = 0;
+    
+    if([self isYearPickerView:pickerView])
+    {
+        fromRow = [self.yearFromPickerView selectedRowInComponent:0];
+        toRow = [self.yearToPickerView selectedRowInComponent:0] + 1;
+    }
+    else if([self isPricePickerView:pickerView])
+    {
+        fromRow = [self.priceMinPickerView selectedRowInComponent:0];
+        toRow = [self.priceMaxPickerView selectedRowInComponent:0];
+    }
+    
+    
+    if ([pickerView isEqual:self.yearFromPickerView])
+    {
+        if (fromRow > toRow)
+            [self.yearToPickerView selectRow:row-1 inComponent:0 animated:YES];
+    }
+    else if ([pickerView isEqual:self.yearToPickerView])
+    {
+        if (toRow < fromRow)
+            [self.yearFromPickerView selectRow:toRow inComponent:0 animated:YES];
+    }
+    else if ([pickerView isEqual:self.priceMinPickerView])
+    {
+        if (fromRow > toRow)
+            [self.priceMaxPickerView selectRow:fromRow inComponent:0 animated:YES];
+    }
+    else if ([pickerView isEqual:self.priceMaxPickerView])
+    {
+        if (toRow < fromRow)
+            [self.priceMinPickerView selectRow:toRow inComponent:0 animated:YES];
+    }
+    
+    
+    [self setSelectedPickerValues:pickerView fromRow:(NSInteger)fromRow toRow:(NSInteger)toRow];
+}
+
+#pragma mark - UIPickerViewDataSource Helpers
+
+- (void)setSelectedPickerValues:(UIPickerView *)pickerView fromRow:(NSInteger)fromRow toRow:(NSInteger)toRow
+{
+    NSString *fromText;
+    NSString *toText;
+    
+    if([self isYearPickerView:pickerView])
+    {
+        fromText = self.yearFromRangeArray[fromRow];
+        toText = self.yearToRangeArray[toRow - 1];
+        
+        self.yearSelectedValueLablel.text = [self selectedValueLabelFromText:fromText toText:toText];
+    }
+    else if([self isPricePickerView:pickerView])
+    {
+        fromText = self.priceMinRangeArray[fromRow];
+        toText = self.priceMaxRangeArray[toRow];
+        
+        self.priceSelectedValueLabel.text = [self selectedValueLabelFromText:fromText toText:toText];
+    }
+}
+
+- (NSString *)selectedValueLabelFromText:(NSString *)fromText toText:(NSString *)toText
+{
+    NSString *delimiterText = @" to ";
+    
+    if ([fromText isEqualToString:KKMNoMinString] && [toText isEqualToString:KKMNoMaxString])
+    {
+        delimiterText = @"Any";
+        fromText = @"";
+        toText = @"";
+    }
+    else
+    {
+        if ([fromText isEqualToString:KKMNoMinString])
+        {
+            fromText = KKMUpToString;
+            delimiterText = @" ";
+        }
+        
+        if ([toText isEqualToString:KKMNoMaxString])
+        {
+            toText = KKMPlusString;
+            delimiterText = @"";
+        }
+    }
+    
+    return [NSString stringWithFormat:@"%@%@%@", fromText, delimiterText, toText];
+}
+
 - (UIView *)pickerReusingView:(UIView *)view withText:(NSString *)text
 {
     UILabel* tView = (UILabel*)view;
@@ -365,34 +498,20 @@ NSString* const KKMNoMaxString = @"No Max";
     return tView;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    NSInteger yearFromRow = [self.yearFromPickerView selectedRowInComponent:0];
-    NSInteger yearToRow = [self.yearToPickerView selectedRowInComponent:0] + 1;
-    
-    NSInteger priceMinRow = [self.priceMinPickerView selectedRowInComponent:0];
-    NSInteger priceMaxRow = [self.priceMaxPickerView selectedRowInComponent:0];
 
-    if ([pickerView isEqual:self.yearFromPickerView])
-    {
-        if (yearFromRow > yearToRow)
-            [self.yearToPickerView selectRow:row-1 inComponent:0 animated:YES];
-    }
-    else if ([pickerView isEqual:self.yearToPickerView])
-    {
-        if (yearToRow < yearFromRow)
-            [self.yearFromPickerView selectRow:yearToRow inComponent:0 animated:YES];
-    }
-    else if ([pickerView isEqual:self.priceMinPickerView])
-    {
-        if (priceMinRow > priceMaxRow)
-            [self.priceMaxPickerView selectRow:priceMinRow inComponent:0 animated:YES];
-    }
-    else if ([pickerView isEqual:self.priceMaxPickerView])
-    {
-        if (priceMaxRow < priceMinRow)
-            [self.priceMinPickerView selectRow:priceMaxRow inComponent:0 animated:YES];
-    }
+- (BOOL)isYearPickerView:(UIPickerView *)pickerView
+{
+    return ([pickerView isEqual:self.yearFromPickerView] || [pickerView isEqual:self.yearToPickerView]);
 }
+
+
+- (BOOL)isPricePickerView:(UIPickerView *)pickerView
+{
+    return ([pickerView isEqual:self.priceMinPickerView] || [pickerView isEqual:self.priceMaxPickerView]);
+}
+
+
+
+
 
 @end
