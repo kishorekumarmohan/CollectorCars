@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		2A4E0E661B7B25E8000596E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E651B7B25E8000596E0 /* main.m */; };
 		2A4E0E691B7B25E8000596E0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E681B7B25E8000596E0 /* AppDelegate.m */; };
-		2A4E0E6C1B7B25E8000596E0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E6B1B7B25E8000596E0 /* ViewController.m */; };
+		2A4E0E6C1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E6B1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m */; };
 		2A4E0E6F1B7B25E8000596E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A4E0E6D1B7B25E8000596E0 /* Main.storyboard */; };
 		2A4E0E711B7B25E8000596E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A4E0E701B7B25E8000596E0 /* Images.xcassets */; };
 		2A4E0E741B7B25E8000596E0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A4E0E721B7B25E8000596E0 /* LaunchScreen.xib */; };
 		2A4E0E801B7B25E8000596E0 /* CollectorCarsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E7F1B7B25E8000596E0 /* CollectorCarsTests.m */; };
+		2AFA0F0A1B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +33,16 @@
 		2A4E0E651B7B25E8000596E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A4E0E671B7B25E8000596E0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2A4E0E681B7B25E8000596E0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2A4E0E6A1B7B25E8000596E0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2A4E0E6B1B7B25E8000596E0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2A4E0E6A1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKMCollectorCarsSettingsViewController.h; sourceTree = "<group>"; };
+		2A4E0E6B1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsSettingsViewController.m; sourceTree = "<group>"; };
 		2A4E0E6E1B7B25E8000596E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2A4E0E701B7B25E8000596E0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2A4E0E731B7B25E8000596E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2A4E0E791B7B25E8000596E0 /* CollectorCarsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectorCarsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A4E0E7E1B7B25E8000596E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A4E0E7F1B7B25E8000596E0 /* CollectorCarsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectorCarsTests.m; sourceTree = "<group>"; };
+		2AFA0F081B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKMCollectorCarsHomeScreenViewController.h; sourceTree = "<group>"; };
+		2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsHomeScreenViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +84,11 @@
 		2A4E0E621B7B25E8000596E0 /* CollectorCars */ = {
 			isa = PBXGroup;
 			children = (
-				2A4E0E671B7B25E8000596E0 /* AppDelegate.h */,
-				2A4E0E681B7B25E8000596E0 /* AppDelegate.m */,
-				2A4E0E6A1B7B25E8000596E0 /* ViewController.h */,
-				2A4E0E6B1B7B25E8000596E0 /* ViewController.m */,
+				2AFA0F071B7BF7050002187B /* App Delegate */,
+				2AFA0F081B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.h */,
+				2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */,
+				2A4E0E6A1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.h */,
+				2A4E0E6B1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m */,
 				2A4E0E6D1B7B25E8000596E0 /* Main.storyboard */,
 				2A4E0E701B7B25E8000596E0 /* Images.xcassets */,
 				2A4E0E721B7B25E8000596E0 /* LaunchScreen.xib */,
@@ -117,6 +121,15 @@
 				2A4E0E7E1B7B25E8000596E0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2AFA0F071B7BF7050002187B /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				2A4E0E671B7B25E8000596E0 /* AppDelegate.h */,
+				2A4E0E681B7B25E8000596E0 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +232,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A4E0E6C1B7B25E8000596E0 /* ViewController.m in Sources */,
+				2AFA0F0A1B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m in Sources */,
+				2A4E0E6C1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m in Sources */,
 				2A4E0E691B7B25E8000596E0 /* AppDelegate.m in Sources */,
 				2A4E0E661B7B25E8000596E0 /* main.m in Sources */,
 			);
@@ -418,6 +432,7 @@
 				2A4E0E851B7B25E8000596E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A4E0E861B7B25E8000596E0 /* Build configuration list for PBXNativeTarget "CollectorCarsTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +441,7 @@
 				2A4E0E881B7B25E8000596E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

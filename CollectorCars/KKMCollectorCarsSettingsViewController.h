@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  KKMCollectorCarsSettingsViewController.h
 //  CollectorCars
 //
 //  Created by Mohan, Kishore Kumar on 8/11/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface KKMCollectorCarsSettingsViewController : UITableViewController
 
 
 @end
