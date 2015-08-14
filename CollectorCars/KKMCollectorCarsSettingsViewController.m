@@ -30,6 +30,8 @@ NSString* const KKMPlusString = @"+";
 @property (weak, nonatomic) IBOutlet UIPickerView *priceMaxPickerView;
 @property (weak, nonatomic) IBOutlet UILabel *priceSelectedValueLabel;
 
+@property (weak, nonatomic) IBOutlet UITextField *keywordTextField;
+
 @property (nonatomic, strong) NSMutableArray *yearFromRangeArray;
 @property (nonatomic, strong) NSMutableArray *yearToRangeArray;
 
@@ -72,6 +74,8 @@ NSString* const KKMPlusString = @"+";
     [self.priceMinPickerView selectRow:0 inComponent:0 animated:YES];
     [self.priceMaxPickerView selectRow:(self.priceMaxRangeArray.count -1) inComponent:0 animated:YES];
     self.priceSelectedValueLabel.text = KKMAnyString;
+    
+    self.keywordTextField.text = @"";
 }
 
 #pragma mark - Setup
@@ -151,7 +155,7 @@ NSString* const KKMPlusString = @"+";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.row == 0)
+    if (indexPath.row == 0 || indexPath.row == 3 || indexPath.row == 4)
         return;
 
     NSArray *viewsToShow;
