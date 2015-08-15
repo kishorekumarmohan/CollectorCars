@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3aw-RW-gUO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O2f-JG-iF8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -16,7 +16,22 @@
                     <view key="view" contentMode="scaleToFill" id="dxz-Dg-aPb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vintage-and-classic-cars-42a" translatesAutoresizingMaskIntoConstraints="NO" id="c3t-hm-6ZF">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="nwX-Eg-ing" appends="YES" id="Xnm-mT-0Dp"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="c3t-hm-6ZF" secondAttribute="trailing" constant="-16" id="3ft-Iq-QxM"/>
+                            <constraint firstItem="mIc-Uw-jfI" firstAttribute="top" secondItem="c3t-hm-6ZF" secondAttribute="bottom" id="7Iv-6i-2N4"/>
+                            <constraint firstItem="c3t-hm-6ZF" firstAttribute="leading" secondItem="dxz-Dg-aPb" secondAttribute="leadingMargin" constant="-16" id="eTG-Ca-p11"/>
+                            <constraint firstItem="c3t-hm-6ZF" firstAttribute="top" secondItem="dxz-Dg-aPb" secondAttribute="topMargin" id="fEO-jS-Tag"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Collector Cars" id="NYs-K8-I28">
                         <barButtonItem key="rightBarButtonItem" image="ic_settings" id="SKX-wZ-Dqt">
@@ -25,19 +40,27 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="c3t-hm-6ZF" id="bSs-ai-aCQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qy0-mP-olh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="nwX-Eg-ing">
+                    <connections>
+                        <action selector="tap:" destination="Vwa-hU-aMp" id="yKl-ih-GPP"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1457" y="201"/>
         </scene>
-        <!--Collector Cars Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="iUE-fh-iNt">
             <objects>
                 <tableViewController id="3aw-RW-gUO" customClass="KKMCollectorCarsSettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="sAL-eD-HLF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <sections>
                             <tableViewSection headerTitle="Section-1" id="Ggk-h4-yBh">
@@ -47,8 +70,18 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rkG-eF-YQQ" id="MDz-kk-Xie">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHx-7A-HSl">
+                                                    <rect key="frame" x="8" y="11" width="100" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="F9N-wa-obE"/>
+                                                        <constraint firstAttribute="height" constant="20" id="b6y-PH-0hm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8K8-GC-qM7">
-                                                    <rect key="frame" x="8" y="8" width="584" height="29"/>
+                                                    <rect key="frame" x="108" y="8" width="484" height="29"/>
                                                     <segments>
                                                         <segment title="Car &amp; Truck"/>
                                                         <segment title="Motorcycle"/>
@@ -57,10 +90,11 @@
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="8K8-GC-qM7" firstAttribute="trailing" secondItem="MDz-kk-Xie" secondAttribute="trailingMargin" id="YoQ-Zl-tYp"/>
-                                                <constraint firstItem="8K8-GC-qM7" firstAttribute="top" secondItem="MDz-kk-Xie" secondAttribute="topMargin" id="aYq-em-i1Y"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="8K8-GC-qM7" secondAttribute="bottom" constant="-1" id="vNf-5J-kED"/>
-                                                <constraint firstItem="8K8-GC-qM7" firstAttribute="leading" secondItem="MDz-kk-Xie" secondAttribute="leadingMargin" id="zAf-PK-G9R"/>
+                                                <constraint firstItem="pHx-7A-HSl" firstAttribute="leading" secondItem="MDz-kk-Xie" secondAttribute="leadingMargin" id="GAT-cm-2T0"/>
+                                                <constraint firstItem="8K8-GC-qM7" firstAttribute="trailing" secondItem="MDz-kk-Xie" secondAttribute="trailingMargin" id="M11-aW-McE"/>
+                                                <constraint firstItem="pHx-7A-HSl" firstAttribute="top" secondItem="MDz-kk-Xie" secondAttribute="topMargin" constant="3" id="Ogn-ve-bJl"/>
+                                                <constraint firstItem="8K8-GC-qM7" firstAttribute="top" secondItem="MDz-kk-Xie" secondAttribute="topMargin" id="jQl-8j-qNi"/>
+                                                <constraint firstItem="8K8-GC-qM7" firstAttribute="leading" secondItem="pHx-7A-HSl" secondAttribute="trailing" id="nKD-2r-vPi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -224,12 +258,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b7C-Bs-97u" id="FZs-J0-QEB">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDE-di-GLx">
-                                                    <rect key="frame" x="282" y="7" width="36" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                                    <state key="normal" title="Reset">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDE-di-GLx">
+                                                    <rect key="frame" x="280" y="7" width="40" height="30"/>
+                                                    <state key="normal" title="Reset"/>
                                                     <connections>
                                                         <action selector="reset:" destination="3aw-RW-gUO" eventType="touchUpInside" id="KYD-Xg-m0h"/>
                                                     </connections>
@@ -248,7 +279,7 @@
                             <outlet property="delegate" destination="3aw-RW-gUO" id="nDK-Jd-lqO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="3hf-OB-l2p">
+                    <navigationItem key="navigationItem" title="Settings" id="3hf-OB-l2p">
                         <barButtonItem key="rightBarButtonItem" image="ic_close" id="bcn-73-JGb">
                             <connections>
                                 <action selector="close:" destination="3aw-RW-gUO" id="R2I-4n-TT1"/>
@@ -309,5 +340,7 @@
     <resources>
         <image name="ic_close" width="24" height="24"/>
         <image name="ic_settings" width="24" height="24"/>
+        <image name="vintage-and-classic-cars-42a" width="1024" height="768"/>
     </resources>
+    <color key="tintColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -347,16 +347,14 @@ NSString* const KKMPlusString = @"+";
     return 44.0f;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] init];
-    return view;
+    return 0.1f;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+- (NSString*)tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] init];
-    return view;
+    return nil;
 }
 
 #pragma mark - UIPickerViewDataSource
