@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A06B3EE1B867C3B00BD2336 /* KKMCollectorCarsDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A06B3ED1B867C3B00BD2336 /* KKMCollectorCarsDataManager.m */; };
+		2A0B46DD1B87DEEF00A9F7DD /* KKMCollectorCarsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B46DC1B87DEEF00A9F7DD /* KKMCollectorCarsRequest.m */; };
 		2A4E0E661B7B25E8000596E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E651B7B25E8000596E0 /* main.m */; };
 		2A4E0E691B7B25E8000596E0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E681B7B25E8000596E0 /* AppDelegate.m */; };
 		2A4E0E6C1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E6B1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m */; };
@@ -14,6 +16,7 @@
 		2A4E0E711B7B25E8000596E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A4E0E701B7B25E8000596E0 /* Images.xcassets */; };
 		2A4E0E741B7B25E8000596E0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A4E0E721B7B25E8000596E0 /* LaunchScreen.xib */; };
 		2A4E0E801B7B25E8000596E0 /* CollectorCarsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E7F1B7B25E8000596E0 /* CollectorCarsTests.m */; };
+		2A5A602C1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5A602B1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m */; };
 		2AFA0F0A1B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A06B3EC1B867C3B00BD2336 /* KKMCollectorCarsDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKMCollectorCarsDataManager.h; sourceTree = "<group>"; };
+		2A06B3ED1B867C3B00BD2336 /* KKMCollectorCarsDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsDataManager.m; sourceTree = "<group>"; };
+		2A0B46DB1B87DEEF00A9F7DD /* KKMCollectorCarsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKMCollectorCarsRequest.h; sourceTree = "<group>"; };
+		2A0B46DC1B87DEEF00A9F7DD /* KKMCollectorCarsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsRequest.m; sourceTree = "<group>"; };
 		2A4E0E601B7B25E8000596E0 /* CollectorCars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorCars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A4E0E641B7B25E8000596E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A4E0E651B7B25E8000596E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -41,6 +48,8 @@
 		2A4E0E791B7B25E8000596E0 /* CollectorCarsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectorCarsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A4E0E7E1B7B25E8000596E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A4E0E7F1B7B25E8000596E0 /* CollectorCarsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectorCarsTests.m; sourceTree = "<group>"; };
+		2A5A602A1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKMCollectorCarsVehicleInfo.h; sourceTree = "<group>"; };
+		2A5A602B1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsVehicleInfo.m; sourceTree = "<group>"; };
 		2AFA0F081B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKMCollectorCarsHomeScreenViewController.h; sourceTree = "<group>"; };
 		2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsHomeScreenViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +98,12 @@
 				2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */,
 				2A4E0E6A1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.h */,
 				2A4E0E6B1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m */,
+				2A5A602A1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.h */,
+				2A5A602B1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m */,
+				2A0B46DB1B87DEEF00A9F7DD /* KKMCollectorCarsRequest.h */,
+				2A0B46DC1B87DEEF00A9F7DD /* KKMCollectorCarsRequest.m */,
+				2A06B3EC1B867C3B00BD2336 /* KKMCollectorCarsDataManager.h */,
+				2A06B3ED1B867C3B00BD2336 /* KKMCollectorCarsDataManager.m */,
 				2A4E0E6D1B7B25E8000596E0 /* Main.storyboard */,
 				2A4E0E701B7B25E8000596E0 /* Images.xcassets */,
 				2A4E0E721B7B25E8000596E0 /* LaunchScreen.xib */,
@@ -236,6 +251,9 @@
 				2A4E0E6C1B7B25E8000596E0 /* KKMCollectorCarsSettingsViewController.m in Sources */,
 				2A4E0E691B7B25E8000596E0 /* AppDelegate.m in Sources */,
 				2A4E0E661B7B25E8000596E0 /* main.m in Sources */,
+				2A06B3EE1B867C3B00BD2336 /* KKMCollectorCarsDataManager.m in Sources */,
+				2A0B46DD1B87DEEF00A9F7DD /* KKMCollectorCarsRequest.m in Sources */,
+				2A5A602C1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

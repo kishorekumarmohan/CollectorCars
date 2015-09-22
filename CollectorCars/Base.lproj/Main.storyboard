@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O2f-JG-iF8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O2f-JG-iF8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -22,15 +22,35 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="nwX-Eg-ing" appends="YES" id="Xnm-mT-0Dp"/>
+                                    <outletCollection property="gestureRecognizers" destination="ldu-Jw-o5A" appends="YES" id="vlq-OH-4DB"/>
+                                    <outletCollection property="gestureRecognizers" destination="vcB-jP-aAC" appends="YES" id="CFD-JX-D7v"/>
                                 </connections>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$123,456,789" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viw-n3-tgJ">
+                                <rect key="frame" x="16" y="571" width="568" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016 Tesla Model X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bn-L1-WAJ">
+                                <rect key="frame" x="16" y="543" width="568" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="c3t-hm-6ZF" secondAttribute="trailing" constant="-16" id="3ft-Iq-QxM"/>
                             <constraint firstItem="mIc-Uw-jfI" firstAttribute="top" secondItem="c3t-hm-6ZF" secondAttribute="bottom" id="7Iv-6i-2N4"/>
+                            <constraint firstItem="viw-n3-tgJ" firstAttribute="trailing" secondItem="dxz-Dg-aPb" secondAttribute="trailingMargin" id="A2S-ku-RE9"/>
+                            <constraint firstItem="mIc-Uw-jfI" firstAttribute="top" secondItem="viw-n3-tgJ" secondAttribute="bottom" constant="8" id="FBJ-7r-Ukc"/>
+                            <constraint firstItem="9Bn-L1-WAJ" firstAttribute="leading" secondItem="dxz-Dg-aPb" secondAttribute="leadingMargin" id="RSr-GW-PIV"/>
+                            <constraint firstItem="viw-n3-tgJ" firstAttribute="leading" secondItem="dxz-Dg-aPb" secondAttribute="leadingMargin" id="Xea-w6-nGi"/>
+                            <constraint firstItem="viw-n3-tgJ" firstAttribute="top" secondItem="9Bn-L1-WAJ" secondAttribute="bottom" constant="8" id="aLt-61-uYh"/>
                             <constraint firstItem="c3t-hm-6ZF" firstAttribute="leading" secondItem="dxz-Dg-aPb" secondAttribute="leadingMargin" constant="-16" id="eTG-Ca-p11"/>
                             <constraint firstItem="c3t-hm-6ZF" firstAttribute="top" secondItem="dxz-Dg-aPb" secondAttribute="topMargin" id="fEO-jS-Tag"/>
+                            <constraint firstItem="9Bn-L1-WAJ" firstAttribute="trailing" secondItem="dxz-Dg-aPb" secondAttribute="trailingMargin" id="uVG-hs-5Vp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Collector Cars" id="NYs-K8-I28">
@@ -42,6 +62,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="c3t-hm-6ZF" id="bSs-ai-aCQ"/>
+                        <outlet property="priceLabel" destination="viw-n3-tgJ" id="zML-Wj-Mrx"/>
+                        <outlet property="titleLabel" destination="9Bn-L1-WAJ" id="izk-4R-Nfg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qy0-mP-olh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -50,6 +72,16 @@
                         <action selector="tap:" destination="Vwa-hU-aMp" id="yKl-ih-GPP"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="ldu-Jw-o5A">
+                    <connections>
+                        <action selector="swipe:" destination="Vwa-hU-aMp" id="e4g-XS-721"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="vcB-jP-aAC">
+                    <connections>
+                        <action selector="swipe:" destination="Vwa-hU-aMp" id="SNM-tJ-sSh"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1457" y="201"/>
         </scene>
