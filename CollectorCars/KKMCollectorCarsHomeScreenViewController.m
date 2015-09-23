@@ -8,15 +8,19 @@
 
 #import "KKMCollectorCarsHomeScreenViewController.h"
 #import "KKMCollectorCarsVehicleInfo.h"
+#import "KKMCollectorCarsDataManager.h"
 
-@interface KKMCollectorCarsHomeScreenViewController ()
+@interface KKMCollectorCarsHomeScreenViewController () <KKMCollectorCarsDataManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
-@property (nonatomic, strong) NSMutableArray *vehicleInfoArray;
+@property (nonatomic, strong) NSArray *vehicleInfoArray;
 @property (nonatomic, assign) NSInteger currentIndex;
+
+@property (nonatomic, strong) KKMCollectorCarsDataManager *dataManager;
 
 
 @end
@@ -26,27 +30,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.vehicleInfoArray = [NSMutableArray new];
-    
-    KKMCollectorCarsVehicleInfo *vehicleInfo1 = [[KKMCollectorCarsVehicleInfo alloc] init];
-    vehicleInfo1.title = @"2014 BMW X4";
-    vehicleInfo1.price = @"$90,000";
-    vehicleInfo1.imageUrls = @[@"http://globe-views.com/dcim/dreams/car/car-03.jpg"];
-
-    KKMCollectorCarsVehicleInfo *vehicleInfo2 = [[KKMCollectorCarsVehicleInfo alloc] init];
-    vehicleInfo2.title = @"2016 Shelby 427 cobra";
-    vehicleInfo2.price = @"$15,000,000";
-    vehicleInfo2.imageUrls = @[@"http://globe-views.com/dcim/dreams/car/car-02.jpg"];
-
-    KKMCollectorCarsVehicleInfo *vehicleInfo3 = [[KKMCollectorCarsVehicleInfo alloc] init];
-    vehicleInfo3.title = @"2016 Ford Mustang";
-    vehicleInfo3.price = @"$94,000";
-    vehicleInfo3.imageUrls = @[@"http://globe-views.com/dcim/dreams/car/car-02.jpg"];
-
-    [self.vehicleInfoArray addObject:vehicleInfo1];
-    [self.vehicleInfoArray addObject:vehicleInfo2];
-    [self.vehicleInfoArray addObject:vehicleInfo3];
+    [self setUp];
 }
+
+- (void)setUp
+{
+    [self.activityIndicatorView startAnimating];
+    [self fetchData];
+}
+
+- (void)fetchData
+{
+    if (self.dataManager == nil)
+    {
+        self.dataManager = [KKMCollectorCarsDataManager new];
+        self.dataManager.dataManagerDelegate = self;
+    }
+    
+    [self.dataManager fetchData];
+}
+
 
 - (IBAction)tap:(id)sender
 {
@@ -55,17 +58,13 @@
 
 - (IBAction)swipe:(id)sender
 {
+    self.activityIndicatorView.hidden = NO;
+
     UISwipeGestureRecognizer *swipeGesture = (UISwipeGestureRecognizer *)sender;
     if(swipeGesture.direction == UISwipeGestureRecognizerDirectionLeft)
-    {
-        NSLog(@"Left");
         self.currentIndex++;
-    }
     else if(swipeGesture.direction == UISwipeGestureRecognizerDirectionRight)
-    {
-        NSLog(@"Right");
         self.currentIndex--;
-    }
     
     if(self.currentIndex < 0)
         self.currentIndex = self.vehicleInfoArray.count - 1;
@@ -73,12 +72,51 @@
     if (self.currentIndex >= self.vehicleInfoArray.count)
         self.currentIndex = self.currentIndex % self.vehicleInfoArray.count;
     
+    [self setUpData];
+}
+
+- (void)setUpData
+{
     KKMCollectorCarsVehicleInfo *vehicleInfo = self.vehicleInfoArray[self.currentIndex];
     self.titleLabel.text = vehicleInfo.title;
     self.priceLabel.text = vehicleInfo.price;
-    self.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:vehicleInfo.imageUrls[0]]]];
-
+    NSLog(@"%@", vehicleInfo);
+    [self loadImage:[NSURL URLWithString: vehicleInfo.imageURLs[0]]];
 }
 
+- (void)loadImage:(NSURL *)imageURL
+{
+    NSOperationQueue *queue = [NSOperationQueue new];
+    NSInvocationOperation *operation = [[NSInvocationOperation alloc]
+                                        initWithTarget:self
+                                        selector:@selector(requestRemoteImage:)
+                                        object:imageURL];
+    [queue addOperation:operation];
+}
+
+- (void)requestRemoteImage:(NSURL *)imageURL
+{
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    [self performSelectorOnMainThread:@selector(placeImageInUI:) withObject:image waitUntilDone:YES];
+}
+
+- (void)placeImageInUI:(UIImage *)image
+{
+    self.imageView.image = image;
+    self.activityIndicatorView.hidden = YES;
+    [self.activityIndicatorView stopAnimating];
+}
+
+#pragma mark - KKMCollectorCarsDataManagerDelegate
+- (void)dataFetchComplete:(NSArray *)vehicleInfoArray
+{
+    self.vehicleInfoArray = vehicleInfoArray;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setUpData];
+    });
+
+}
 
 @end

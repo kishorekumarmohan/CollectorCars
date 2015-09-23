@@ -11,4 +11,10 @@
 @implementation KKMCollectorCarsVehicleInfo
 
 
+- (NSString *)description
+{
+    NSString *desc = [NSString stringWithFormat:@"title: %@\r price: %@\r imageURLs: %@\r", self.title, self.price, self.imageURLs];
+    return desc;
+}
+
 @end

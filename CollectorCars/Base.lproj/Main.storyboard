@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O2f-JG-iF8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O2f-JG-iF8">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -17,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vintage-and-classic-cars-42a" translatesAutoresizingMaskIntoConstraints="NO" id="c3t-hm-6ZF">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c3t-hm-6ZF">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -26,30 +27,35 @@
                                     <outletCollection property="gestureRecognizers" destination="vcB-jP-aAC" appends="YES" id="CFD-JX-D7v"/>
                                 </connections>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$123,456,789" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viw-n3-tgJ">
-                                <rect key="frame" x="16" y="571" width="568" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viw-n3-tgJ">
+                                <rect key="frame" x="20" y="571" width="560" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016 Tesla Model X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bn-L1-WAJ">
-                                <rect key="frame" x="16" y="543" width="568" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bn-L1-WAJ">
+                                <rect key="frame" x="20" y="545.5" width="560" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5DZ-25-J6I">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="c3t-hm-6ZF" secondAttribute="trailing" constant="-16" id="3ft-Iq-QxM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="c3t-hm-6ZF" secondAttribute="trailing" constant="-20" id="3ft-Iq-QxM"/>
+                            <constraint firstItem="5DZ-25-J6I" firstAttribute="centerY" secondItem="dxz-Dg-aPb" secondAttribute="centerY" id="4gy-51-54h"/>
                             <constraint firstItem="mIc-Uw-jfI" firstAttribute="top" secondItem="c3t-hm-6ZF" secondAttribute="bottom" id="7Iv-6i-2N4"/>
                             <constraint firstItem="viw-n3-tgJ" firstAttribute="trailing" secondItem="dxz-Dg-aPb" secondAttribute="trailingMargin" id="A2S-ku-RE9"/>
                             <constraint firstItem="mIc-Uw-jfI" firstAttribute="top" secondItem="viw-n3-tgJ" secondAttribute="bottom" constant="8" id="FBJ-7r-Ukc"/>
                             <constraint firstItem="9Bn-L1-WAJ" firstAttribute="leading" secondItem="dxz-Dg-aPb" secondAttribute="leadingMargin" id="RSr-GW-PIV"/>
                             <constraint firstItem="viw-n3-tgJ" firstAttribute="leading" secondItem="dxz-Dg-aPb" secondAttribute="leadingMargin" id="Xea-w6-nGi"/>
                             <constraint firstItem="viw-n3-tgJ" firstAttribute="top" secondItem="9Bn-L1-WAJ" secondAttribute="bottom" constant="8" id="aLt-61-uYh"/>
-                            <constraint firstItem="c3t-hm-6ZF" firstAttribute="leading" secondItem="dxz-Dg-aPb" secondAttribute="leadingMargin" constant="-16" id="eTG-Ca-p11"/>
+                            <constraint firstItem="c3t-hm-6ZF" firstAttribute="leading" secondItem="dxz-Dg-aPb" secondAttribute="leadingMargin" constant="-20" id="eTG-Ca-p11"/>
                             <constraint firstItem="c3t-hm-6ZF" firstAttribute="top" secondItem="dxz-Dg-aPb" secondAttribute="topMargin" id="fEO-jS-Tag"/>
+                            <constraint firstItem="5DZ-25-J6I" firstAttribute="centerX" secondItem="dxz-Dg-aPb" secondAttribute="centerX" id="i4M-dH-SZI"/>
                             <constraint firstItem="9Bn-L1-WAJ" firstAttribute="trailing" secondItem="dxz-Dg-aPb" secondAttribute="trailingMargin" id="uVG-hs-5Vp"/>
                         </constraints>
                     </view>
@@ -61,6 +67,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="5DZ-25-J6I" id="HK8-tB-YJE"/>
                         <outlet property="imageView" destination="c3t-hm-6ZF" id="bSs-ai-aCQ"/>
                         <outlet property="priceLabel" destination="viw-n3-tgJ" id="zML-Wj-Mrx"/>
                         <outlet property="titleLabel" destination="9Bn-L1-WAJ" id="izk-4R-Nfg"/>
@@ -98,8 +105,10 @@
                             <tableViewSection headerTitle="Section-1" id="Ggk-h4-yBh">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="rkG-eF-YQQ">
+                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rkG-eF-YQQ" id="MDz-kk-Xie">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHx-7A-HSl">
@@ -131,8 +140,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="204" id="GGW-eH-jje">
+                                        <rect key="frame" x="0.0" y="157.5" width="600" height="204"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GGW-eH-jje" id="XIj-l3-Fkk">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="203.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBC-tK-Ji9">
@@ -191,9 +202,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="204" id="Uux-ug-Rg5">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="361.5" width="600" height="204"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uux-ug-Rg5" id="oyr-Zu-DYi">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="203.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUQ-B1-HU5">
@@ -252,9 +264,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="itg-KT-0qr">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="565.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="itg-KT-0qr" id="ZEE-7p-ngi">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keywords" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMA-cx-ApC">
@@ -285,13 +298,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="b7C-Bs-97u">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="609.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b7C-Bs-97u" id="FZs-J0-QEB">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDE-di-GLx">
-                                                    <rect key="frame" x="280" y="7" width="40" height="30"/>
+                                                    <rect key="frame" x="280.5" y="7" width="39" height="30"/>
                                                     <state key="normal" title="Reset"/>
                                                     <connections>
                                                         <action selector="reset:" destination="3aw-RW-gUO" eventType="touchUpInside" id="KYD-Xg-m0h"/>
@@ -372,7 +386,6 @@
     <resources>
         <image name="ic_close" width="24" height="24"/>
         <image name="ic_settings" width="24" height="24"/>
-        <image name="vintage-and-classic-cars-42a" width="1024" height="768"/>
     </resources>
     <color key="tintColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
 </document>

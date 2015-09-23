@@ -8,12 +8,14 @@
 
 #import "KKMCollectorCarsDataManager.h"
 #import "KKMCollectorCarsRequest.h"
+#import "KKMCollectorCarsVehicleInfo.h"
 
-NSString *const KKMBaseUrlString = @"http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=KishoreK-d288-4f95-bb9f-884a571b018d&RESPONSE-DATA-FORMAT=JSON";
+NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=KishoreK-d288-4f95-bb9f-884a571b018d&RESPONSE-DATA-FORMAT=JSON&outputSelector=PictureURLSuperSize";
 
 @interface KKMCollectorCarsDataManager ()
 
 @property (nonatomic, strong) KKMCollectorCarsRequest *request;
+
 @end
 
 @implementation KKMCollectorCarsDataManager
@@ -21,74 +23,92 @@ NSString *const KKMBaseUrlString = @"http://svcs.ebay.com/services/search/Findin
 - (void)fetchData
 {
     NSMutableString *urlString = [NSMutableString stringWithFormat:KKMBaseUrlString];
-    if (self.request.minPrice > 0 || self.request.maxPrice > 0)
-    {
-        [urlString stringByAppendingString:@"&itemFilter(0).name="];
-        [urlString stringByAppendingString:@"MaxPrice"];
-        [urlString stringByAppendingString:@"&itemFilter(0).value="];
 
-        if (self.request.minPrice > 0)
-            [urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.minPrice]];
-        else
-            [urlString stringByAppendingString:@"0"];
-
-        [urlString stringByAppendingString:@"&itemFilter(0).paramName=Currency"];
-        [urlString stringByAppendingString:@"&itemFilter(0).paramValue=USD"];
-        [urlString stringByAppendingString:@"&itemFilter(1).name="];
-        [urlString stringByAppendingString:@"MinPrice"];
-        [urlString stringByAppendingString:@"&itemFilter(1).value="];
-
-        if (self.request.maxPrice > 0)
-            [urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.maxPrice]];
-        else
-            [urlString stringByAppendingString:@"10000000"];
-        
-        [urlString stringByAppendingString:@"&itemFilter(1).paramName=Currency"];
-        [urlString stringByAppendingString:@"&itemFilter(1).paramValue=USD"];
-    }
+    // price
+    urlString = [[urlString stringByAppendingString:@"&itemFilter(0).name=MinPrice&itemFilter(0).value="] mutableCopy];
     
+    if (self.request.minPrice == 0 && self.request.maxPrice == 0)
+        urlString = [[urlString stringByAppendingString:@"65000"] mutableCopy];
+    else if (self.request.minPrice > 0)
+        urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.minPrice]] mutableCopy];
+    else
+        urlString = [[urlString stringByAppendingString:@"0"] mutableCopy];
+    
+    
+    urlString = [[urlString stringByAppendingString:@"&itemFilter(0).paramName=Currency&itemFilter(0).paramValue=USD&itemFilter(1).name=MaxPrice&itemFilter(1).value="] mutableCopy];
+    
+    if (self.request.maxPrice > 0)
+        urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.maxPrice]] mutableCopy];
+    else
+        urlString = [[urlString stringByAppendingString:@"10000000"] mutableCopy];
+    
+    urlString = [[urlString stringByAppendingString:@"&itemFilter(1).paramName=Currency&itemFilter(1).paramValue=USD"] mutableCopy];
+    
+    
+    // year
     if (self.request.minYear > 0 || self.request.maxYear > 0)
     {
-        [urlString stringByAppendingString:@"&aspectFilter.aspectName=Model%20Year"];
-        [urlString stringByAppendingString:@"&aspectFilter.aspectValueName="];
-        if (self.request.minYear <=0 )
-            self.request.minYear = 1986;
-
-        NSCalendar *gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-        NSInteger year = [gregorian component:NSCalendarUnitYear fromDate:NSDate.date];
-
-        if (self.request.maxYear <=0 )
-            self.request.maxYear = year;
+        urlString = [[urlString stringByAppendingString:@"&aspectFilter.aspectName=Model%20Year&aspectFilter.aspectValueName="] mutableCopy];
         
-        if (self.request.minYear > 0 && self.request.maxYear > 0)
+        NSInteger minYear;
+        if (self.request.minYear <= 0)
+            minYear = 1986;
+
+        NSInteger maxYear;
+        if (self.request.maxYear <= 0)
         {
-            for (NSInteger j = self.request.minYear; j < self.request.maxYear; j++)
-            {
-                [urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)j]];
-            }
+            NSCalendar *gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+            NSInteger year = [gregorian component:NSCalendarUnitYear fromDate:NSDate.date];
+            maxYear = year;
+        }
+
+        for (NSInteger j = minYear; j < maxYear; j++)
+        {
+            urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)j]] mutableCopy];
         }
     }
-    [urlString stringByAppendingString:@"&paginationInput.entriesPerPage="];
-    [urlString stringByAppendingString:@"10"];
-    [urlString stringByAppendingString:@"&categoryId="];
-    [urlString stringByAppendingString:@"6001"];
-    [urlString stringByAppendingString:@"keywords"];
-    [urlString stringByAppendingString:@"shelby"];
+    
+    urlString = [[urlString stringByAppendingString:@"&paginationInput.entriesPerPage="] mutableCopy];
+    urlString = [[urlString stringByAppendingString:@"10"] mutableCopy];
+    urlString = [[urlString stringByAppendingString:@"&categoryId="] mutableCopy];
+    urlString = [[urlString stringByAppendingString:@"6001"] mutableCopy];
+    urlString = [[urlString stringByAppendingString:@"&keywords="] mutableCopy];
+    urlString = [[urlString stringByAppendingString:@"shelby"] mutableCopy];
     
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                            completionHandler:
-                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                      // ...
-                                  }];
+    __block NSArray *vehicleInfoArray;
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data)
+        {
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            vehicleInfoArray = [self parseJSON:jsonDict];
+        }
+        
+        [self.dataManagerDelegate dataFetchComplete:vehicleInfoArray];
+    }];
     
     [task resume];
 }
 
+- (NSArray *)parseJSON:(NSDictionary *)jsonDict
+{
+    NSArray *itemsArray = jsonDict[@"findItemsAdvancedResponse"][0][@"searchResult"][0][@"item"];
+    NSMutableArray *vehicleInfoArray = [NSMutableArray new];
+    for (NSDictionary *itemDict in itemsArray)
+    {
+        KKMCollectorCarsVehicleInfo *vehicleInfo = [KKMCollectorCarsVehicleInfo new];
+        vehicleInfo.title = itemDict[@"title"][0];
+        vehicleInfo.price = itemDict[@"sellingStatus"][0][@"currentPrice"][0][@"__value__"];
+        vehicleInfo.imageURLs = itemDict[@"pictureURLSuperSize"];
+        
+        [vehicleInfoArray addObject:vehicleInfo];
+    }
+    return vehicleInfoArray;
+}
 
 @end
 
-//http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=KishoreK-d288-4f95-bb9f-884a571b018d&RESPONSE-DATA-FORMAT=JSON&itemFilter(0).name=MaxPrice&itemFilter(0).value=100000&itemFilter(0).paramName=Currency&itemFilter(0).paramValue=USD&itemFilter(1).name=MinPrice&itemFilter(1).value=50000&itemFilter(1).paramName=Currency&itemFilter(1).paramValue=USD&aspectFilter.aspectName=Model%20Year&aspectFilter.aspectValueName=2015%7C2014&paginationInput.entriesPerPage=2&categoryId=6001&keywords=shelby
+//https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=KishoreK-d288-4f95-bb9f-884a571b018d&RESPONSE-DATA-FORMAT=JSON&itemFilter(0).name=MinPrice&itemFilter(0).value=0&itemFilter(0).paramName=Currency&itemFilter(0).paramValue=USD&itemFilter(1).name=MaxPrice&itemFilter(1).value=10000000&itemFilter(1).paramName=Currency&itemFilter(1).paramValue=USD&paginationInput.entriesPerPage=10&categoryId=6001&keywords=shelby&outputSelector(0)=searchResult.item.pictureURLSuperSize

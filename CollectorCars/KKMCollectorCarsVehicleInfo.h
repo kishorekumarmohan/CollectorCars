@@ -12,6 +12,6 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *price;
-@property (nonatomic, copy) NSArray *imageUrls;
+@property (nonatomic, copy) NSArray *imageURLs;
 
 @end

@@ -10,11 +10,11 @@
 
 @interface KKMCollectorCarsRequest : NSObject
 
-@property (nonatomic, strong) NSInteger minPrice;
-@property (nonatomic, strong) NSInteger maxPrice;
+@property (nonatomic, assign) NSInteger minPrice;
+@property (nonatomic, assign) NSInteger maxPrice;
 
-@property (nonatomic, strong) NSInteger minYear;
-@property (nonatomic, strong) NSInteger maxYear;
+@property (nonatomic, assign) NSInteger minYear;
+@property (nonatomic, assign) NSInteger maxYear;
 
 @property (nonatomic, assign) NSInteger categoryID;
 

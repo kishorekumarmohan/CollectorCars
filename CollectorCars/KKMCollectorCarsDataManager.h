@@ -8,8 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol KKMCollectorCarsDataManagerDelegate <NSObject>
+
+- (void)dataFetchComplete:(NSArray *)vehicleInfoArray;
+
+@end
+
+
 @interface KKMCollectorCarsDataManager : NSObject
 
+@property (nonatomic, weak) id<KKMCollectorCarsDataManagerDelegate> dataManagerDelegate;
 
+- (void)fetchData;
 
 @end
