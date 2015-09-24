@@ -10,20 +10,43 @@
 #import "KKMCollectorCarsRequest.h"
 #import "KKMCollectorCarsVehicleInfo.h"
 
-NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=KishoreK-d288-4f95-bb9f-884a571b018d&RESPONSE-DATA-FORMAT=JSON&outputSelector=PictureURLSuperSize";
+NSInteger const KKMCollectorCarEntriesPerPage = 5;
+
+NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=KishoreK-d288-4f95-bb9f-884a571b018d&RESPONSE-DATA-FORMAT=JSON&outputSelector(0)=PictureURLSuperSize&outputSelector(1)=PictureURLLarge";
 
 @interface KKMCollectorCarsDataManager ()
 
 @property (nonatomic, strong) KKMCollectorCarsRequest *request;
+@property (nonatomic, strong) NSMutableArray *vehicleInfoArray;
 
 @end
 
 @implementation KKMCollectorCarsDataManager
 
-- (void)fetchData
+- (instancetype)init
 {
+    self = [super init];
+    if (self)
+    {
+        _request = [KKMCollectorCarsRequest new];
+        _vehicleInfoArray = [NSMutableArray new];
+    }
+    return self;
+}
+
+- (void)fetchDataForPageNumber:(NSInteger)pageNumber
+{
+    self.request.pageNumber = pageNumber;
+    
     NSMutableString *urlString = [NSMutableString stringWithFormat:KKMBaseUrlString];
 
+    // page number
+    urlString = [[urlString stringByAppendingString:@"&paginationInput.entriesPerPage="] mutableCopy];
+    urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", KKMCollectorCarEntriesPerPage]] mutableCopy];
+    
+    urlString = [[urlString stringByAppendingString:@"&paginationInput.pageNumber="] mutableCopy];
+    urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.pageNumber]] mutableCopy];
+    
     // price
     urlString = [[urlString stringByAppendingString:@"&itemFilter(0).name=MinPrice&itemFilter(0).value="] mutableCopy];
     
@@ -68,26 +91,27 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
         }
     }
     
-    urlString = [[urlString stringByAppendingString:@"&paginationInput.entriesPerPage="] mutableCopy];
-    urlString = [[urlString stringByAppendingString:@"10"] mutableCopy];
     urlString = [[urlString stringByAppendingString:@"&categoryId="] mutableCopy];
     urlString = [[urlString stringByAppendingString:@"6001"] mutableCopy];
     urlString = [[urlString stringByAppendingString:@"&keywords="] mutableCopy];
     urlString = [[urlString stringByAppendingString:@"shelby"] mutableCopy];
     
+    NSLog(@"%@", urlString);
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSession *session = [NSURLSession sharedSession];
-    __block NSArray *vehicleInfoArray;
+
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data)
         {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            vehicleInfoArray = [self parseJSON:jsonDict];
+            NSArray *results = [self parseJSON:jsonDict];
+            if (results)
+                [self.vehicleInfoArray addObjectsFromArray:results];
         }
         
-        [self.dataManagerDelegate dataFetchComplete:vehicleInfoArray];
+        [self.dataManagerDelegate dataFetchComplete:self.vehicleInfoArray];
     }];
     
     [task resume];
@@ -100,11 +124,21 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
     for (NSDictionary *itemDict in itemsArray)
     {
         KKMCollectorCarsVehicleInfo *vehicleInfo = [KKMCollectorCarsVehicleInfo new];
+        vehicleInfo.itemID = itemDict[@"itemId"][0];
         vehicleInfo.title = itemDict[@"title"][0];
         vehicleInfo.price = itemDict[@"sellingStatus"][0][@"currentPrice"][0][@"__value__"];
-        vehicleInfo.imageURLs = itemDict[@"pictureURLSuperSize"];
+
+        NSArray *imageURLs = itemDict[@"pictureURLSuperSize"];
+        if (imageURLs.count > 0)
+            vehicleInfo.imageURLs = imageURLs;
+        else
+            imageURLs = itemDict[@"pictureURLLarge"];
         
-        [vehicleInfoArray addObject:vehicleInfo];
+        if (imageURLs.count)
+        {
+            vehicleInfo.imageURLs = imageURLs;
+            [vehicleInfoArray addObject:vehicleInfo];
+        }
     }
     return vehicleInfoArray;
 }

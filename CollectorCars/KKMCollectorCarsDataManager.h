@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSInteger const KKMCollectorCarEntriesPerPage;
+
+
 @protocol KKMCollectorCarsDataManagerDelegate <NSObject>
 
 - (void)dataFetchComplete:(NSArray *)vehicleInfoArray;
@@ -19,6 +22,5 @@
 
 @property (nonatomic, weak) id<KKMCollectorCarsDataManagerDelegate> dataManagerDelegate;
 
-- (void)fetchData;
-
+- (void)fetchDataForPageNumber:(NSInteger)pageNumber;
 @end

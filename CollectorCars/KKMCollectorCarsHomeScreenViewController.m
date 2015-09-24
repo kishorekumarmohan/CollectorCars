@@ -21,7 +21,7 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @property (nonatomic, strong) KKMCollectorCarsDataManager *dataManager;
-
+@property (nonatomic, assign) NSInteger pageNumber;
 
 @end
 
@@ -35,19 +35,20 @@
 
 - (void)setUp
 {
+    self.pageNumber = 1;
     [self.activityIndicatorView startAnimating];
     [self fetchData];
 }
 
 - (void)fetchData
-{
+{    
     if (self.dataManager == nil)
     {
         self.dataManager = [KKMCollectorCarsDataManager new];
         self.dataManager.dataManagerDelegate = self;
     }
     
-    [self.dataManager fetchData];
+    [self.dataManager fetchDataForPageNumber:self.pageNumber];
 }
 
 
@@ -72,16 +73,32 @@
     if (self.currentIndex >= self.vehicleInfoArray.count)
         self.currentIndex = self.currentIndex % self.vehicleInfoArray.count;
     
+    if (self.vehicleInfoArray.count - self.currentIndex == 2)
+    {
+        self.pageNumber++;
+        [self.dataManager fetchDataForPageNumber:self.pageNumber];
+    }
+    
     [self setUpData];
 }
 
 - (void)setUpData
 {
+    if (self.vehicleInfoArray.count == 0)
+        return;
+    
     KKMCollectorCarsVehicleInfo *vehicleInfo = self.vehicleInfoArray[self.currentIndex];
     self.titleLabel.text = vehicleInfo.title;
     self.priceLabel.text = vehicleInfo.price;
-    NSLog(@"%@", vehicleInfo);
     [self loadImage:[NSURL URLWithString: vehicleInfo.imageURLs[0]]];
+    
+//    [UIView transitionWithView:self.titleLabel
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromTop
+//                    animations:^{
+//                        self.titleLabel.text = vehicleInfo.title;
+//                    }
+//                    completion:nil];
 }
 
 - (void)loadImage:(NSURL *)imageURL

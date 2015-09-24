@@ -10,8 +10,9 @@
 
 @interface KKMCollectorCarsVehicleInfo : NSObject
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *price;
-@property (nonatomic, copy) NSArray *imageURLs;
+@property (nonatomic, strong) NSString *itemID;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *price;
+@property (nonatomic, strong) NSArray *imageURLs;
 
 @end

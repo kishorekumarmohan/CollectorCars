@@ -20,4 +20,6 @@
 
 @property (nonatomic, strong) NSString *keywords;
 
+@property (nonatomic, assign) NSInteger pageNumber;
+
 @end

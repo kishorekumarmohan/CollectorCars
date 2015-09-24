@@ -10,4 +10,12 @@
 
 @implementation KKMCollectorCarsRequest
 
+- (NSInteger)pageNumber
+{
+    if (_pageNumber == 0)
+        _pageNumber = 1;
+
+    return _pageNumber;
+}
+
 @end
