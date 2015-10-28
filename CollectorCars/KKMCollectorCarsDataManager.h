@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+@class KKMCollectorCarsRequest;
 
 extern NSInteger const KKMCollectorCarEntriesPerPage;
-
 
 @protocol KKMCollectorCarsDataManagerDelegate <NSObject>
 
@@ -22,5 +22,6 @@ extern NSInteger const KKMCollectorCarEntriesPerPage;
 
 @property (nonatomic, weak) id<KKMCollectorCarsDataManagerDelegate> dataManagerDelegate;
 
-- (void)fetchDataForPageNumber:(NSInteger)pageNumber;
+- (void)fetchDataWithRequest:(KKMCollectorCarsRequest *)request;
+
 @end

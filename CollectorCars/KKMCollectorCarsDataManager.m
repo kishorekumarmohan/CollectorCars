@@ -11,13 +11,15 @@
 #import "KKMCollectorCarsVehicleInfo.h"
 
 NSInteger const KKMCollectorCarEntriesPerPage = 50;
+NSString *const KKMCollectorCarMinPrice = @"5000";
+NSString *const KKMCollectorCarMaxPrice = @"10000000";
 
 NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=KishoreK-d288-4f95-bb9f-884a571b018d&RESPONSE-DATA-FORMAT=JSON&outputSelector(0)=PictureURLSuperSize&outputSelector(1)=PictureURLLarge";
 
 @interface KKMCollectorCarsDataManager ()
 
 @property (nonatomic, strong) KKMCollectorCarsRequest *request;
-@property (nonatomic, strong) NSMutableArray *vehicleInfoArray;
+@property (nonatomic, strong) NSArray *vehicleInfoArray;
 
 @end
 
@@ -29,17 +31,17 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
     if (self)
     {
         _request = [KKMCollectorCarsRequest new];
-        _vehicleInfoArray = [NSMutableArray new];
+        _vehicleInfoArray = [NSArray new];
     }
     return self;
 }
 
-- (void)fetchDataForPageNumber:(NSInteger)pageNumber
+- (void)fetchDataWithRequest:(KKMCollectorCarsRequest *)request
 {
-    self.request.pageNumber = pageNumber;
+    self.request = request;
     
     NSMutableString *urlString = [NSMutableString stringWithFormat:KKMBaseUrlString];
-
+    
     // page number
     urlString = [[urlString stringByAppendingString:@"&paginationInput.entriesPerPage="] mutableCopy];
     urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", KKMCollectorCarEntriesPerPage]] mutableCopy];
@@ -51,7 +53,7 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
     urlString = [[urlString stringByAppendingString:@"&itemFilter(0).name=MinPrice&itemFilter(0).value="] mutableCopy];
     
     if (self.request.minPrice == 0 && self.request.maxPrice == 0)
-        urlString = [[urlString stringByAppendingString:@"65000"] mutableCopy];
+        urlString = [[urlString stringByAppendingString:KKMCollectorCarMinPrice] mutableCopy];
     else if (self.request.minPrice > 0)
         urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.minPrice]] mutableCopy];
     else
@@ -63,7 +65,7 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
     if (self.request.maxPrice > 0)
         urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.maxPrice]] mutableCopy];
     else
-        urlString = [[urlString stringByAppendingString:@"10000000"] mutableCopy];
+        urlString = [[urlString stringByAppendingString:KKMCollectorCarMaxPrice] mutableCopy];
     
     urlString = [[urlString stringByAppendingString:@"&itemFilter(1).paramName=Currency&itemFilter(1).paramValue=USD"] mutableCopy];
     
@@ -76,7 +78,7 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
         NSInteger minYear;
         if (self.request.minYear <= 0)
             minYear = 1986;
-
+        
         NSInteger maxYear;
         if (self.request.maxYear <= 0)
         {
@@ -84,31 +86,40 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
             NSInteger year = [gregorian component:NSCalendarUnitYear fromDate:NSDate.date];
             maxYear = year;
         }
-
+        
         for (NSInteger j = minYear; j < maxYear; j++)
         {
             urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)j]] mutableCopy];
         }
     }
     
+    if (self.request.categoryID == 0)
+        self.request.categoryID = 6001;
+    
     urlString = [[urlString stringByAppendingString:@"&categoryId="] mutableCopy];
-    urlString = [[urlString stringByAppendingString:@"6001"] mutableCopy];
-    urlString = [[urlString stringByAppendingString:@"&keywords="] mutableCopy];
-    urlString = [[urlString stringByAppendingString:@"shelby"] mutableCopy];
+    urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.categoryID]] mutableCopy];
+    
+    if (self.request.keywords)
+    {
+        urlString = [[urlString stringByAppendingString:@"&keywords="] mutableCopy];
+        urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%@", self.request.keywords]] mutableCopy];
+    }
     
     NSLog(@"%@", urlString);
     NSURL *URL = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:URL];
     
     NSURLSession *session = [NSURLSession sharedSession];
-
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data)
         {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSArray *results = [self parseJSON:jsonDict];
             if (results)
-                [self.vehicleInfoArray addObjectsFromArray:results];
+            {
+                self.vehicleInfoArray = results;
+            }
         }
         
         [self.dataManagerDelegate dataFetchComplete:self.vehicleInfoArray];

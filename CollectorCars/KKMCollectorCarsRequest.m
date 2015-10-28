@@ -18,4 +18,10 @@
     return _pageNumber;
 }
 
+- (NSString *)description
+{
+    NSString *desc = [NSString stringWithFormat:@"minPrice: %ld; maxPrice: %ld; minYear: %ld; maxYear: %ld; categoryId: %ld; keywords %@; pageNumber: %ld;", (long)self.minPrice, (long)self.maxPrice, (long)self.minYear, (long)self.maxYear, (long)self.categoryID, self.keywords, (long)self.pageNumber];
+    return desc;
+}
+
 @end

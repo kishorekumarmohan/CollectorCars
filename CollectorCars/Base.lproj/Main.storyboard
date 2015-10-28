@@ -9,7 +9,7 @@
         <!--Settings-->
         <scene sceneID="iUE-fh-iNt">
             <objects>
-                <tableViewController id="3aw-RW-gUO" customClass="KKMCollectorCarsSettingsViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="KKMCollectorCarsSettingsViewController" id="3aw-RW-gUO" customClass="KKMCollectorCarsSettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="sAL-eD-HLF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -239,8 +239,20 @@
                             <outlet property="delegate" destination="3aw-RW-gUO" id="nDK-Jd-lqO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="3hf-OB-l2p"/>
+                    <navigationItem key="navigationItem" title="Settings" id="3hf-OB-l2p">
+                        <barButtonItem key="leftBarButtonItem" image="ic_close" id="fHY-k1-msK">
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="3aw-RW-gUO" id="eDm-xE-TfV"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="ic_done" id="pwH-lk-ATc">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="3aw-RW-gUO" id="yZF-rJ-eUa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="categorySegmentControl" destination="8K8-GC-qM7" id="taI-oX-OpR"/>
                         <outlet property="keywordTextField" destination="Uos-bu-ooa" id="86T-I9-DXO"/>
                         <outlet property="priceMaxPickerView" destination="K1f-8p-fSS" id="Zy3-MC-sEj"/>
                         <outlet property="priceMinPickerView" destination="1Go-kM-YIb" id="pm9-8f-yWZ"/>
@@ -252,9 +264,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heP-C5-YoL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1829" y="478"/>
+            <point key="canvasLocation" x="2641" y="478"/>
         </scene>
-        <!--Collector Vehicles-->
+        <!--CC-->
         <scene sceneID="mmB-66-O4A">
             <objects>
                 <collectionViewController id="9xU-LI-jLh" customClass="KKMCollectorCarsHomeScreenViewController" sceneMemberID="viewController">
@@ -262,22 +274,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="DYy-Q2-KOS">
-                            <size key="itemSize" width="186" height="180"/>
+                            <size key="itemSize" width="283" height="244"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyCell" id="x9E-05-jjc" customClass="KKMCollectorCarsCollectionViewCell">
-                                <rect key="frame" x="0.0" y="64" width="186" height="180"/>
+                                <rect key="frame" x="0.0" y="64" width="283" height="244"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="186" height="180"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="283" height="244"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xeM-1C-Cir">
-                                            <rect key="frame" x="0.0" y="0.0" width="186" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="283" height="244"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahv-Gj-B7P">
+                                            <rect key="frame" x="8" y="215" width="267" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="2Lt-We-ezZ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -285,11 +306,15 @@
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="xeM-1C-Cir" secondAttribute="trailing" constant="-8" id="1ki-dQ-Xs4"/>
                                     <constraint firstItem="xeM-1C-Cir" firstAttribute="leading" secondItem="x9E-05-jjc" secondAttribute="leadingMargin" constant="-8" id="2oA-6n-DGW"/>
+                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="trailing" secondItem="x9E-05-jjc" secondAttribute="trailingMargin" id="5lo-zk-VPv"/>
+                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="bottom" secondItem="x9E-05-jjc" secondAttribute="bottomMargin" id="9ak-EL-4kq"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="xeM-1C-Cir" secondAttribute="bottom" constant="-8" id="Fxc-ZR-Flh"/>
+                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="leading" secondItem="x9E-05-jjc" secondAttribute="leadingMargin" id="LUt-Eb-xYJ"/>
                                     <constraint firstItem="xeM-1C-Cir" firstAttribute="top" secondItem="x9E-05-jjc" secondAttribute="topMargin" constant="-8" id="vhi-9M-ERw"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="xeM-1C-Cir" id="6aN-E4-9DR"/>
+                                    <outlet property="titleLabel" destination="Ahv-Gj-B7P" id="eZs-gv-zJu"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -298,17 +323,17 @@
                             <outlet property="delegate" destination="9xU-LI-jLh" id="A0z-gR-CPn"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Collector Vehicles" id="SMk-n2-WhI">
+                    <navigationItem key="navigationItem" title="CC" id="SMk-n2-WhI">
                         <barButtonItem key="rightBarButtonItem" image="ic_settings" id="oW0-78-6l9">
                             <connections>
-                                <segue destination="3aw-RW-gUO" kind="show" id="htz-UY-Nl3"/>
+                                <segue destination="Nci-ln-2eB" kind="presentation" identifier="KKMCollectorCarsSettingsViewController" id="LUb-Nh-Pom"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0C-nL-20H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1734" y="-355"/>
+            <point key="canvasLocation" x="1348" y="-435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LxV-SA-hwh">
@@ -326,10 +351,30 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpx-1O-L2U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="918" y="-349"/>
+            <point key="canvasLocation" x="655" y="-435"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fUm-FI-ZuU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nci-ln-2eB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="q2a-Kw-2ot">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3aw-RW-gUO" kind="relationship" relationship="rootViewController" id="hXb-Me-6Pn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rKL-pp-JKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1829" y="478"/>
         </scene>
     </scenes>
     <resources>
+        <image name="ic_close" width="24" height="24"/>
+        <image name="ic_done" width="24" height="24"/>
         <image name="ic_settings" width="24" height="24"/>
     </resources>
     <color key="tintColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>

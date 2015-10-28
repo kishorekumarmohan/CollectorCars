@@ -7,9 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+@class  KKMCollectorCarsHomeScreenViewController;
+@class KKMCollectorCarsRequest;
+
+@protocol KKMSaveButtonTappedDelegate;
+
 
 @interface KKMCollectorCarsSettingsViewController : UITableViewController
 
+@property (nonatomic, strong) KKMCollectorCarsRequest *request;
+@property (nonatomic, weak) id<KKMSaveButtonTappedDelegate> saveButtonDelegate;
+
+@end
+
+
+@protocol KKMSaveButtonTappedDelegate <NSObject>
+
+- (void)saveButtonTappedOnViewController:(KKMCollectorCarsSettingsViewController *)contoller withRequest:(KKMCollectorCarsRequest *)request;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "KKMCollectorCarsSettingsViewController.h"
+#import "KKMCollectorCarsRequest.h"
 
 NSInteger const KKMMaxPriceRange = 1000000; //1M
 NSInteger const KKMPriceIncrement = 50000;
@@ -21,6 +22,8 @@ NSString* const KKMUpToString = @"up to";
 NSString* const KKMPlusString = @"+";
 
 @interface KKMCollectorCarsSettingsViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *categorySegmentControl;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *yearFromPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *yearToPickerView;
@@ -48,7 +51,7 @@ NSString* const KKMPlusString = @"+";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self setupInitialDataFromRequest];
     [self setUp];
 }
 
@@ -58,27 +61,40 @@ NSString* const KKMPlusString = @"+";
     [self setUpPickerDefaultValues];
 }
 
-- (void)setUpPickerDefaultValues
+#pragma mark - Action
+
+- (IBAction)saveButtonTapped:(id)sender
 {
-    [self.yearFromPickerView reloadAllComponents];
-    [self.yearToPickerView reloadAllComponents];
+    KKMCollectorCarsRequest *request = [[KKMCollectorCarsRequest alloc] init];
+
+    if(self.categorySegmentControl.selectedSegmentIndex == 0)
+        request.categoryID = 6001;
+    else
+        request.categoryID = 6024;
     
-    [self.yearFromPickerView selectRow:0 inComponent:0 animated:YES];
-    [self.yearToPickerView selectRow:(self.yearToRangeArray.count - 1) inComponent:0 animated:YES];
-    self.yearSelectedValueLablel.text = KKMAnyString;
-    
-    
-    [self.priceMinPickerView reloadAllComponents];
-    [self.priceMaxPickerView reloadAllComponents];
-    
-    [self.priceMinPickerView selectRow:0 inComponent:0 animated:YES];
-    [self.priceMaxPickerView selectRow:(self.priceMaxRangeArray.count -1) inComponent:0 animated:YES];
-    self.priceSelectedValueLabel.text = KKMAnyString;
-    
-    self.keywordTextField.text = @"";
+    request.keywords = self.keywordTextField.text;
+    [self.saveButtonDelegate saveButtonTappedOnViewController:self withRequest:request];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)closeButtonTapped:(id)sender
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Setup
+
+- (void)setupInitialDataFromRequest
+{
+    if (self.request.categoryID == 6001)
+        [self.categorySegmentControl setSelectedSegmentIndex:0];
+    else
+        [self.categorySegmentControl setSelectedSegmentIndex:1];
+    
+    if (self.request.keywords)
+        self.keywordTextField.text = self.request.keywords;
+}
+
 - (void)setUp
 {
     [self hidePickerViews];
@@ -136,6 +152,23 @@ NSString* const KKMPlusString = @"+";
     [self setUpPricePickerData];
 }
 
+- (void)setUpPickerDefaultValues
+{
+    [self.yearFromPickerView reloadAllComponents];
+    [self.yearToPickerView reloadAllComponents];
+    
+    [self.yearFromPickerView selectRow:0 inComponent:0 animated:YES];
+    [self.yearToPickerView selectRow:(self.yearToRangeArray.count - 1) inComponent:0 animated:YES];
+    self.yearSelectedValueLablel.text = KKMAnyString;
+    
+    
+    [self.priceMinPickerView reloadAllComponents];
+    [self.priceMaxPickerView reloadAllComponents];
+    
+    [self.priceMinPickerView selectRow:0 inComponent:0 animated:YES];
+    [self.priceMaxPickerView selectRow:(self.priceMaxRangeArray.count -1) inComponent:0 animated:YES];
+    self.priceSelectedValueLabel.text = KKMAnyString;
+}
 
 
 #pragma mark - Actions
