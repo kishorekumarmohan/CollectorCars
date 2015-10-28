@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KKMCollectorCarsHomeScreenViewController : UIViewController
+@interface KKMCollectorCarsHomeScreenViewController : UICollectionViewController
 
 @end

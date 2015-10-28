@@ -6,16 +6,15 @@
 //  Copyright (c) 2015 Mohan, Kishore Kumar. All rights reserved.
 //
 
+@import WebImage;
+
 #import "KKMCollectorCarsHomeScreenViewController.h"
 #import "KKMCollectorCarsVehicleInfo.h"
 #import "KKMCollectorCarsDataManager.h"
+#import "KKMCollectorCarsCollectionViewCell.h"
+#import <WebImage/UIImageView+WebCache.h>
 
-@interface KKMCollectorCarsHomeScreenViewController () <KKMCollectorCarsDataManagerDelegate>
-
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@interface KKMCollectorCarsHomeScreenViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, KKMCollectorCarsDataManagerDelegate>
 
 @property (nonatomic, strong) NSArray *vehicleInfoArray;
 @property (nonatomic, assign) NSInteger currentIndex;
@@ -30,110 +29,58 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setUp];
+    [self setup];
+    [self setupData];
 }
 
-- (void)setUp
+- (void)setup
 {
     self.pageNumber = 1;
-    [self.activityIndicatorView startAnimating];
-    [self fetchData];
 }
 
-- (void)fetchData
-{    
+- (void)setupData
+{
     if (self.dataManager == nil)
-    {
-        self.dataManager = [KKMCollectorCarsDataManager new];
-        self.dataManager.dataManagerDelegate = self;
-    }
-    
+        self.dataManager = [[KKMCollectorCarsDataManager alloc] init];
+ 
+    self.dataManager.dataManagerDelegate = self;
     [self.dataManager fetchDataForPageNumber:self.pageNumber];
 }
 
 
-- (IBAction)tap:(id)sender
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"Here tapped");
+    return self.vehicleInfoArray.count;
 }
 
-- (IBAction)swipe:(id)sender
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.activityIndicatorView.hidden = NO;
+    static NSString *cellIdentifier = @"MyCell";
+    KKMCollectorCarsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
 
-    UISwipeGestureRecognizer *swipeGesture = (UISwipeGestureRecognizer *)sender;
-    if(swipeGesture.direction == UISwipeGestureRecognizerDirectionLeft)
-        self.currentIndex++;
-    else if(swipeGesture.direction == UISwipeGestureRecognizerDirectionRight)
-        self.currentIndex--;
+    KKMCollectorCarsVehicleInfo *vehicleInfo = self.vehicleInfoArray[indexPath.row];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:vehicleInfo.imageURLs[0]] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
-    if(self.currentIndex < 0)
-        self.currentIndex = self.vehicleInfoArray.count - 1;
-
-    if (self.currentIndex >= self.vehicleInfoArray.count)
-        self.currentIndex = self.currentIndex % self.vehicleInfoArray.count;
-    
-    if (self.vehicleInfoArray.count - self.currentIndex == 2)
-    {
-        self.pageNumber++;
-        [self.dataManager fetchDataForPageNumber:self.pageNumber];
-    }
-    
-    [self setUpData];
+    return cell;
 }
 
-- (void)setUpData
+#pragma mark - UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.vehicleInfoArray.count == 0)
-        return;
-    
-    KKMCollectorCarsVehicleInfo *vehicleInfo = self.vehicleInfoArray[self.currentIndex];
-    self.titleLabel.text = vehicleInfo.title;
-    self.priceLabel.text = vehicleInfo.price;
-    [self loadImage:[NSURL URLWithString: vehicleInfo.imageURLs[0]]];
-    
-//    [UIView transitionWithView:self.titleLabel
-//                      duration:0.5
-//                       options:UIViewAnimationOptionTransitionFlipFromTop
-//                    animations:^{
-//                        self.titleLabel.text = vehicleInfo.title;
-//                    }
-//                    completion:nil];
-}
-
-- (void)loadImage:(NSURL *)imageURL
-{
-    NSOperationQueue *queue = [NSOperationQueue new];
-    NSInvocationOperation *operation = [[NSInvocationOperation alloc]
-                                        initWithTarget:self
-                                        selector:@selector(requestRemoteImage:)
-                                        object:imageURL];
-    [queue addOperation:operation];
-}
-
-- (void)requestRemoteImage:(NSURL *)imageURL
-{
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    
-    [self performSelectorOnMainThread:@selector(placeImageInUI:) withObject:image waitUntilDone:YES];
-}
-
-- (void)placeImageInUI:(UIImage *)image
-{
-    self.imageView.image = image;
-    self.activityIndicatorView.hidden = YES;
-    [self.activityIndicatorView stopAnimating];
+    return CGSizeMake(collectionView.bounds.size.width, collectionView.bounds.size.height);
 }
 
 #pragma mark - KKMCollectorCarsDataManagerDelegate
+
 - (void)dataFetchComplete:(NSArray *)vehicleInfoArray
 {
     self.vehicleInfoArray = vehicleInfoArray;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setUpData];
+        [self.collectionView reloadData];
     });
-
 }
+
 
 @end

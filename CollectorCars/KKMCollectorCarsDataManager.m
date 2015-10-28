@@ -10,7 +10,7 @@
 #import "KKMCollectorCarsRequest.h"
 #import "KKMCollectorCarsVehicleInfo.h"
 
-NSInteger const KKMCollectorCarEntriesPerPage = 5;
+NSInteger const KKMCollectorCarEntriesPerPage = 50;
 
 NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=KishoreK-d288-4f95-bb9f-884a571b018d&RESPONSE-DATA-FORMAT=JSON&outputSelector(0)=PictureURLSuperSize&outputSelector(1)=PictureURLLarge";
 
