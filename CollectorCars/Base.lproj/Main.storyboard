@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SBx-PV-SsD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SBx-PV-SsD">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -264,7 +264,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heP-C5-YoL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2641" y="478"/>
+            <point key="canvasLocation" x="1388" y="297"/>
         </scene>
         <!--CC-->
         <scene sceneID="mmB-66-O4A">
@@ -291,12 +291,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="283" height="244"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahv-Gj-B7P">
-                                            <rect key="frame" x="8" y="215" width="267" height="21"/>
+                                            <rect key="frame" x="8" y="156" width="267" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="2Lt-We-ezZ"/>
+                                                <constraint firstAttribute="height" constant="21" id="D2c-5q-n4j"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVE-Gu-g2w">
+                                            <rect key="frame" x="8" y="185" width="267" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="wEu-UX-kaf"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -304,16 +313,21 @@
                                 </view>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="bVE-Gu-g2w" firstAttribute="leading" secondItem="x9E-05-jjc" secondAttribute="leadingMargin" id="0sR-nT-yQK"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="xeM-1C-Cir" secondAttribute="trailing" constant="-8" id="1ki-dQ-Xs4"/>
                                     <constraint firstItem="xeM-1C-Cir" firstAttribute="leading" secondItem="x9E-05-jjc" secondAttribute="leadingMargin" constant="-8" id="2oA-6n-DGW"/>
-                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="trailing" secondItem="x9E-05-jjc" secondAttribute="trailingMargin" id="5lo-zk-VPv"/>
-                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="bottom" secondItem="x9E-05-jjc" secondAttribute="bottomMargin" id="9ak-EL-4kq"/>
+                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="bottom" secondItem="x9E-05-jjc" secondAttribute="bottomMargin" constant="-59" id="3Jg-9F-1jz"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="xeM-1C-Cir" secondAttribute="bottom" constant="-8" id="Fxc-ZR-Flh"/>
-                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="leading" secondItem="x9E-05-jjc" secondAttribute="leadingMargin" id="LUt-Eb-xYJ"/>
+                                    <constraint firstItem="bVE-Gu-g2w" firstAttribute="trailing" secondItem="x9E-05-jjc" secondAttribute="trailingMargin" id="Hxh-KX-gV7"/>
+                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="leading" secondItem="x9E-05-jjc" secondAttribute="leadingMargin" id="PLe-SK-sxK"/>
+                                    <constraint firstItem="bVE-Gu-g2w" firstAttribute="top" secondItem="Ahv-Gj-B7P" secondAttribute="bottom" constant="8" id="byZ-sD-4JL"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="bVE-Gu-g2w" secondAttribute="bottom" constant="30" id="dqG-fM-eK1"/>
+                                    <constraint firstItem="Ahv-Gj-B7P" firstAttribute="trailing" secondItem="x9E-05-jjc" secondAttribute="trailingMargin" id="srD-2o-dtX"/>
                                     <constraint firstItem="xeM-1C-Cir" firstAttribute="top" secondItem="x9E-05-jjc" secondAttribute="topMargin" constant="-8" id="vhi-9M-ERw"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="xeM-1C-Cir" id="6aN-E4-9DR"/>
+                                    <outlet property="priceLabel" destination="bVE-Gu-g2w" id="1Zi-cl-hYK"/>
                                     <outlet property="titleLabel" destination="Ahv-Gj-B7P" id="eZs-gv-zJu"/>
                                 </connections>
                             </collectionViewCell>
@@ -369,7 +383,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKL-pp-JKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1829" y="478"/>
+            <point key="canvasLocation" x="655" y="297"/>
         </scene>
     </scenes>
     <resources>

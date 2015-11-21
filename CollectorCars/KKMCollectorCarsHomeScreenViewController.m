@@ -13,7 +13,6 @@
 #import "KKMCollectorCarsDataManager.h"
 #import "KKMCollectorCarsCollectionViewCell.h"
 #import <WebImage/UIImageView+WebCache.h>
-#import "UIImage+AverageColor.h"
 #import "KKMCollectorCarsSettingsViewController.h"
 #import "KKMCollectorCarsRequest.h"
 
@@ -71,21 +70,13 @@
 {
     static NSString *cellIdentifier = @"MyCell";
     KKMCollectorCarsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        cell.activityIndicator.hidden = NO;
-//        [cell.activityIndicator startAnimating];
-//    });
-    
+   
     KKMCollectorCarsVehicleInfo *vehicleInfo = self.vehicleInfoArray[indexPath.row];
     cell.titleLabel.text = vehicleInfo.title;
+    cell.titleLabel.textColor = [UIColor redColor];
+    cell.priceLabel.text = vehicleInfo.price;
     NSLog(@"%@", cell.titleLabel.text);
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:vehicleInfo.imageURLs[0]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        cell.activityIndicator.hidden = YES;
-//        [cell.activityIndicator stopAnimating];
-//    });
     return cell;
 }
 

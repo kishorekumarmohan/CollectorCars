@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class KKMCollectorCarsRequest;
 
-extern NSInteger const KKMCollectorCarEntriesPerPage;
+extern NSString *const KKMCollectorCarEntriesPerPage;
 
 @protocol KKMCollectorCarsDataManagerDelegate <NSObject>
 

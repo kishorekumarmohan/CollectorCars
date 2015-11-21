@@ -20,7 +20,6 @@
 		2A4E0E801B7B25E8000596E0 /* CollectorCarsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E0E7F1B7B25E8000596E0 /* CollectorCarsTests.m */; };
 		2A5A602C1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5A602B1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m */; };
 		2A87BD141BB5E125009582A9 /* KKMCollectorCarsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A87BD131BB5E125009582A9 /* KKMCollectorCarsCollectionViewCell.m */; };
-		2AA61C1E1BE080F000FE9FE0 /* UIImage+AverageColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA61C1D1BE080F000FE9FE0 /* UIImage+AverageColor.m */; };
 		2AFA0F0A1B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -71,8 +70,6 @@
 		2A5A602B1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsVehicleInfo.m; sourceTree = "<group>"; };
 		2A87BD121BB5E125009582A9 /* KKMCollectorCarsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKMCollectorCarsCollectionViewCell.h; sourceTree = "<group>"; };
 		2A87BD131BB5E125009582A9 /* KKMCollectorCarsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsCollectionViewCell.m; sourceTree = "<group>"; };
-		2AA61C1C1BE080F000FE9FE0 /* UIImage+AverageColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AverageColor.h"; sourceTree = "<group>"; };
-		2AA61C1D1BE080F000FE9FE0 /* UIImage+AverageColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AverageColor.m"; sourceTree = "<group>"; };
 		2AFA0F081B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKMCollectorCarsHomeScreenViewController.h; sourceTree = "<group>"; };
 		2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKMCollectorCarsHomeScreenViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,12 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				2AFA0F071B7BF7050002187B /* App Delegate */,
-				2AFA0F081B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.h */,
-				2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */,
-				2AA61C1C1BE080F000FE9FE0 /* UIImage+AverageColor.h */,
-				2AA61C1D1BE080F000FE9FE0 /* UIImage+AverageColor.m */,
-				2A87BD121BB5E125009582A9 /* KKMCollectorCarsCollectionViewCell.h */,
-				2A87BD131BB5E125009582A9 /* KKMCollectorCarsCollectionViewCell.m */,
+				2AC13A171BFFFFD60031E5CF /* Home Screen */,
 				2A63253F1BE003100023A55A /* Settings */,
 				2A6325401BE0031E0023A55A /* DataManager */,
 				2A4E0E6D1B7B25E8000596E0 /* Main.storyboard */,
@@ -181,6 +173,17 @@
 				2A06B3ED1B867C3B00BD2336 /* KKMCollectorCarsDataManager.m */,
 			);
 			name = DataManager;
+			sourceTree = "<group>";
+		};
+		2AC13A171BFFFFD60031E5CF /* Home Screen */ = {
+			isa = PBXGroup;
+			children = (
+				2AFA0F081B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.h */,
+				2AFA0F091B7BF7410002187B /* KKMCollectorCarsHomeScreenViewController.m */,
+				2A87BD121BB5E125009582A9 /* KKMCollectorCarsCollectionViewCell.h */,
+				2A87BD131BB5E125009582A9 /* KKMCollectorCarsCollectionViewCell.m */,
+			);
+			name = "Home Screen";
 			sourceTree = "<group>";
 		};
 		2AFA0F071B7BF7050002187B /* App Delegate */ = {
@@ -299,7 +302,6 @@
 				2A4E0E691B7B25E8000596E0 /* AppDelegate.m in Sources */,
 				2A4E0E661B7B25E8000596E0 /* main.m in Sources */,
 				2A06B3EE1B867C3B00BD2336 /* KKMCollectorCarsDataManager.m in Sources */,
-				2AA61C1E1BE080F000FE9FE0 /* UIImage+AverageColor.m in Sources */,
 				2A0B46DD1B87DEEF00A9F7DD /* KKMCollectorCarsRequest.m in Sources */,
 				2A5A602C1B818A930019BBC4 /* KKMCollectorCarsVehicleInfo.m in Sources */,
 			);

@@ -10,7 +10,7 @@
 #import "KKMCollectorCarsRequest.h"
 #import "KKMCollectorCarsVehicleInfo.h"
 
-NSInteger const KKMCollectorCarEntriesPerPage = 50;
+NSString *const KKMCollectorCarEntriesPerPage = @"50";
 NSString *const KKMCollectorCarMinPrice = @"5000";
 NSString *const KKMCollectorCarMaxPrice = @"10000000";
 
@@ -44,7 +44,7 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
     
     // page number
     urlString = [[urlString stringByAppendingString:@"&paginationInput.entriesPerPage="] mutableCopy];
-    urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", KKMCollectorCarEntriesPerPage]] mutableCopy];
+    urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%@", KKMCollectorCarEntriesPerPage]] mutableCopy];
     
     urlString = [[urlString stringByAppendingString:@"&paginationInput.pageNumber="] mutableCopy];
     urlString = [[urlString stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)self.request.pageNumber]] mutableCopy];
@@ -137,7 +137,7 @@ NSString *const KKMBaseUrlString = @"https://svcs.ebay.com/services/search/Findi
         KKMCollectorCarsVehicleInfo *vehicleInfo = [KKMCollectorCarsVehicleInfo new];
         vehicleInfo.itemID = itemDict[@"itemId"][0];
         vehicleInfo.title = itemDict[@"title"][0];
-        vehicleInfo.price = itemDict[@"sellingStatus"][0][@"currentPrice"][0][@"__value__"];
+        vehicleInfo.price = [NSString stringWithFormat:@"$%@", itemDict[@"sellingStatus"][0][@"currentPrice"][0][@"__value__"]];
 
         NSArray *imageURLs = itemDict[@"pictureURLSuperSize"];
         if (imageURLs.count > 0)
